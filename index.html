@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ISO/IEC 17025:2017 Clause 7.11.2 Workbook &amp; CSV Pre-Scan</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="privacy-bar" class="privacy-bar" role="status">
+    <span class="privacy-dot" aria-hidden="true"></span>
+    <span id="privacy-bar-text">100% Browser-Local Analysis &#8212; Your file never leaves your browser; zero server upload.</span>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <span id="brand-badge" class="brand-badge">100% BROWSER-LOCAL TESTING LAB SCREENING</span>
+      <h1 id="site-title">ISO/IEC 17025:2017 Clause 7.11.2 Workbook &amp; CSV Pre-Scan</h1>
+      <p class="subtitle">15-second client-side .xlsx/.xlsm formula defect scan, Clause 7.11.2 boundary test vector matrix, and Clause 6.4/7.5 instrument calibration CSV cross-check.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="legal-disclaimer-banner" class="disclaimer-banner" aria-label="Non-Audit and Non-Accreditation Disclosure">
+      <strong id="legal-disclaimer-text">
+        INDEPENDENT NON-AUDIT &amp; NON-ACCREDITATION TOOL: This browser-local pre-scan is an informational engineering readiness check only. It is non-audit, not an audit report, is not an accreditation body (not affiliated with A2LA, ANAB, NVLAP, or PJLA), and does not provide certification, accreditation, or legal advice. Package scope is strictly 5-8 core .xlsx workbooks plus up to 50 raw instrument/calibration CSVs for a $1,495.00 fixed non-contingent fee (0% commission, never a contingent fee). Your laboratory Quality Manager locally executes and approves final Clause 7.11.2 validation sign-off. Zero DoD, ITAR, EAR, AMS2750, Nadcap, CUI, or clinical PHI permitted.
+      </strong>
+    </section>
+
+    <section id="step-1" class="card interactive-only">
+      <div class="step-header">
+        <span class="step-num">Step 1</span>
+        <h2>Run 1-Click Embedded Real .xlsx + Calibration CSV Samples</h2>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="button-row">
+            <button type="button" id="sample-qualified-btn" class="btn btn-primary">Load Qualified Lab Sample (.xlsx + CSVs)</button>
+            <button type="button" id="sample-below-btn" class="btn btn-secondary">Load Clean Below-Threshold Sample</button>
+          </div>
+          <p class="field-hint">Decodes real binary .xlsx OOXML archives and instrument calibration CSVs directly in browser memory via native DecompressionStream("deflate-raw") and DOMParser.</p>
+        </div>
+        <div class="scope-pill-box">
+          <strong>Fixed Package Scope: 5-8 Core .xlsx Workbooks + &le;50 Raw CSVs ($1,495.00 Fixed Non-Contingent Fee)</strong>
+          <span>Includes Clause 7.11.2 formula inspection, URS &amp; 5-case verification test vector matrix, and Clause 6.4/7.5 calibration expiry cross-check. Workbooks &gt;8 or CSVs &gt;50 are flagged as tiered add-on scope.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="step-2" class="card interactive-only">
+      <div class="step-header">
+        <span class="step-num">Step 2</span>
+        <h2>Load Local .xlsx / .xlsm Workbooks &amp; Instrument CSVs (Zero Upload)</h2>
+      </div>
+
+      <div id="dropzone" class="dropzone" tabindex="0">
+        <p class="dropzone-title">Drag and drop your .xlsx, .xlsm, and .csv files here</p>
+        <p class="dropzone-sub">Read locally via FileReader.readAsArrayBuffer (.xlsx/.xlsm) and FileReader.readAsText (.csv). Zero server upload.</p>
+        <div class="button-row" style="justify-content:center;">
+          <label for="file-input" class="btn btn-outline file-label">
+            Choose Local .xlsx / .xlsm / .csv Files
+            <input id="file-input" type="file" multiple accept=".xlsx,.xlsm,.csv,text/csv" class="file-input-hidden">
+          </label>
+          <button type="button" id="clear-files-btn" class="btn btn-outline">Clear Loaded Files</button>
+        </div>
+      </div>
+
+      <div id="file-status" class="file-status">No local workbooks or CSVs loaded yet.</div>
+      <div id="loaded-files-row" class="loaded-files-row"></div>
+
+      <div id="shield-alert" class="shield-alert" role="alert" hidden>
+        <strong>Blocked by Local Defense / Export-Control / Clinical PHI Shield</strong>
+        <p>Prohibited markers (ITAR, EAR, AMS2750, NADCAP, CUI, DoD, PATIENT_NAME, MRN, or SSN) were detected locally. Screening halted before evaluation; remove restricted data and retry:</p>
+        <ul id="shield-findings-list"></ul>
+      </div>
+    </section>
+
+    <section id="step-3" class="card result-section" hidden>
+      <div class="print-only">
+        <h2>ISO/IEC 17025:2017 Clause 7.11.2 Pre-Scan &#8212; 1-Page Executive Brief</h2>
+        <p>100% Browser-Local Analysis &#8212; Your file never leaves your browser; zero server upload.</p>
+      </div>
+
+      <div class="step-header conclusion-header">
+        <div>
+          <span class="step-num">Step 3</span>
+          <h2>15-Second Traceable Clause 7.11.2 &amp; 6.4/7.5 Pre-Scan Conclusion</h2>
+        </div>
+        <div id="verdict-badge" class="verdict-badge">-</div>
+      </div>
+
+      <div class="meta-strip">
+        <div><strong>Scope Check:</strong> <span id="result-scope">-</span></div>
+        <div><strong>Deterministic Fingerprint:</strong> <code id="result-fingerprint">-</code></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Defects Detected</div>
+          <div id="kpi-defects" class="kpi-value">0</div>
+          <div id="kpi-defects-sub" class="kpi-sub">0 workbook | 0 CSV</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Formula Cells &amp; CSV Rows</div>
+          <div id="kpi-coverage" class="kpi-value">0 / 0</div>
+          <div id="kpi-vectors-sub" class="kpi-sub">0 test vectors generated</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Reassessment &amp; QA Anchor</div>
+          <div id="kpi-anchor" class="kpi-value">$4k-$12k</div>
+          <div class="kpi-sub">Avoided NCR reassessment + 40-80 QA hrs</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Fixed Non-Contingent Fee</div>
+          <div class="kpi-value">$1,495.00</div>
+          <div class="kpi-sub">5-8 .xlsx + &le;50 CSVs (0% commission)</div>
+        </div>
+      </div>
+
+      <div class="actions-bar interactive-only">
+        <button type="button" id="download-csv-btn" class="btn btn-primary">Download Traceability CSV</button>
+        <button type="button" id="download-brief-btn" class="btn btn-secondary">Download 1-Page HTML Brief</button>
+        <button type="button" id="print-brief-btn" class="btn btn-outline">Print 1-Page Brief</button>
+      </div>
+
+      <div id="filter-tabs" class="filter-tabs interactive-only" role="tablist" aria-label="Filter pre-scan findings"></div>
+
+      <div class="table-wrap">
+        <table id="trace-table" class="trace-table">
+          <thead id="trace-thead"></thead>
+          <tbody id="trace-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="mailto-box interactive-only">
+        <div class="mailto-header">
+          <div>
+            <h3>Next Step: Share Fingerprint Summary Only (Zero Raw Files Attached)</h3>
+            <p class="field-hint">Opens your local email client via <code>mailto:intake@scan.far31prescan.com</code> with counts and fingerprint only. Never transmits raw workbooks or CSVs.</p>
+          </div>
+          <div class="button-row">
+            <a id="mailto-link" href="mailto:intake@scan.far31prescan.com" class="btn btn-primary">Open Pre-Filled Email</a>
+            <button type="button" id="copy-mailto-btn" class="btn btn-outline">Copy Summary &amp; Email</button>
+          </div>
+        </div>
+        <pre id="mailto-preview" class="mailto-preview"></pre>
+      </div>
+    </section>
+
+    <section class="card interactive-only" aria-label="Scope and Alternative Comparison">
+      <div class="step-header">
+        <span class="step-num">Scope</span>
+        <h2>Why Commercial Testing Labs Use This Before Reassessment</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Pricing Structure</th>
+              <th>Clause 7.11.2 URS &amp; 5-Case Test Vectors</th>
+              <th>Clause 6.4/7.5 50-CSV Calibration Cross-Check</th>
+              <th>Quality Manager Local Sign-Off</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Clause 7.11.2 Validation Prep Pack (5-8 .xlsx + &le;50 CSVs)</strong></td>
+              <td><strong>$1,495.00 Fixed Non-Contingent Fee</strong></td>
+              <td>Included per formula cell (Nominal, Zero, Negative, Upper Bound, Sig-Fig)</td>
+              <td>Included across up to 50 raw instrument &amp; register CSVs</td>
+              <td>Lab Quality Manager locally executes &amp; signs off</td>
+            </tr>
+            <tr>
+              <td>XLTest (&euro;199) / OAK / $49-$99 Static Checklists</td>
+              <td>&euro;199 or $49-$99 checklist</td>
+              <td>Syntax checks / manual templates only; no URS + boundary matrix</td>
+              <td>Not included</td>
+              <td>40-80 QA Manager hours manual teardown</td>
+            </tr>
+            <tr>
+              <td>ExcelSafe ($4,500+) or Macro Remediation ($9k-$15k+)</td>
+              <td>$4,500+ software / $9k-$15k+ services</td>
+              <td>Multi-month vendor rollout</td>
+              <td>Separate LIMS integration</td>
+              <td>Heavy IT/vendor dependency</td>
+            </tr>
+            <tr>
+              <td>Major NCR &amp; Reassessment Delay</td>
+              <td>$4,000-$12,000 reassessment + lost testing revenue</td>
+              <td>Reactive corrective action under deadline</td>
+              <td>Calibration traceability finding</td>
+              <td>Immediate CAPA pressure</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./csv_parser.js"></script>
+  <script src="./xlsx_local_parser.js"></script>
+  <script src="./config.js"></script>
+  <script src="./engine_plugin.js"></script>
+  <script src="./samples.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
